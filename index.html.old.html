@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap"> 
+    <title>Um formulário</title>
+    <style>
+        body{
+            font-family: 'Open Sans';
+            font-size: 16px;
+            color: #494949;
+            background: #efefef;
+        }
+
+        .content-form{
+            margin: 50px 0px;
+            background: #FFF;
+            padding: 40px;
+            border-radius:15px;
+        }
+        .my-form{
+            display: block;
+        }
+        .my-form-input{
+            position: relative;
+            float: left;
+            width: 100%;
+        }
+        .my-form-input > label{
+            font-size: .8rem;
+            margin-bottom: 0px;
+            font-weight: 700;
+        }  
+        .my-form-input > input[type=text],
+        .my-form-input > input[type=password],
+        .my-form-input > input[type=email],
+        .my-form-input > select,
+        .my-form-input > textarea{
+            position: relative;
+            float: left;
+            width: 100%;
+            height:40px;
+            border:0px;
+            border-bottom:1px solid #ccc;
+            box-shadow:0px;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            animation: border .3s ease-in-out;
+        }
+
+        .my-form-input > input::-webkit-input-placeholder {
+            color: #e3e3e3;
+            opacity: 1;
+        }
+
+        .my-form-input > input::-moz-placeholder {
+            color: #e3e3e3;
+            opacity: 1;
+        }
+
+        .my-form-input > input:-ms-input-placeholder {
+            color: #e3e3e3;
+            opacity: 1;
+        }
+
+        .my-form-input > input::-ms-input-placeholder {
+            color: #e3e3e3;
+            opacity: 1;
+        }
+
+        .my-form-input > input::placeholder {
+            color: #e3e3e3;
+            opacity: 1;
+        }
+        .my-form-input > input.success{
+            border-color: #76b465;
+        }
+
+        .my-form-input > input.error{
+            border-color: #e8655f;
+        }
+        .my-form-input > .icon-validation{
+            position: absolute;
+            float: left;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            background: #000;
+            color: #FFF;
+            right: 0px;
+            bottom: 3px;
+            opacity: 0;
+        }
+        .my-form-input > .icon-validation.success,
+        .border-validator.success{
+            background: #76b465;
+            transition-delay: .4s;
+            opacity: 1;
+        }
+        
+        .my-form-input > .icon-validation.error,
+        .border-validator.error{
+            background: #e8655f;
+            transition-delay: .4s;
+            opacity: 1;
+        }
+
+        .my-form-input > .text-validation{
+            position: absolute;
+            float: left;
+            width: auto;
+            right: 35px;
+            bottom: 3px;
+            height: 25px;
+            background: #efefef;
+            font-size: .8rem;
+            line-height: 25px;
+            padding: 0 10px;
+            border-radius: 5px;
+            opacity: 0;
+            white-space: nowrap;
+        }   
+
+        .my-form-input > .text-validation::after{
+            position: absolute;
+            float: left;
+            width: 0;
+            height: 0;
+            right: -9px;
+            content: "";
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-left: 9px solid #efefef;
+            top: 4px;
+        }
+
+        .border-validator{
+            position: absolute;
+            float: left;
+            width: 0%;
+            height: 2px;
+            left: 0px;
+            bottom: 30px;
+            
+        }
+        .border-validator.success,
+        .border-validator.error{
+            width: 100%;
+            transition: width .3s linear
+        }
+        
+        
+        .my-form-input > .text-validation.success{
+            color: #76b465;
+            transition-delay: .4s;
+            opacity: 1;
+        }
+        .my-form-input > .text-validation.error{
+            color: #e8655f;
+            transition-delay: .4s;
+            opacity: 1;
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- main -->
+    <section id="main">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5 col-12 content-form">
+                    <h3>Meu título do formulário</h3>
+                    <p>Um breve texto de resumo</p>
+                    <form name="my-form" id="my-form" class="my-form" action="" method="POST">                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="my-form-input">
+                                    <label>Nome</label>
+                                    <input type="text" name="name" id="name" value="" placeholder="Nome completo..." data-validate="not-null|string|min:3|max:120" class="">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="my-form-input">
+                                    <label>E-mail</label>
+                                    <input type="text" name="email" id="email" value="" placeholder="Seu endereço de e-mail..." data-validate="not-null|email">                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="my-form-input">
+                                    <label>Senha</label>
+                                    <input type="password" name="password" id="password" value="" placeholder="Sua senha..." data-validate="not-null|min:3|max:120">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="my-form-input">
+                                    <label>Confirme sua senha</label>
+                                    <input type="password" name="password_confirm" id="password_confirm" value="" placeholder="Confirme sua senha..." data-validate="not-null|input-confirm:password|min:3|max:120">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-8">
+                                <div class="my-form-input">
+                                    <label>Sua idade</label>
+                                    <input type="text" name="age" id="age" value="" placeholder="Qual é a sua idade..." data-validate="not-null|numeric|min-number:1|max-number:100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="my-form-input">
+                                    <label>Escreva aqui</label>
+                                    <input type="text" name="content" id="content" value="" placeholder="Digite aqui..." data-validate="not-null|string">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="my-form-input">
+                                    <button type="submit">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script>
+        var rules = {
+            'not-null' : '',
+            'string'   : '',
+            'email'    : '',
+            'numeric'  : '',
+            'min'      : '',
+            'max'      : '',
+            'input_confirm' : '',
+            'cpf' : '',
+        }
+        $(document).ready(function(){
+            /*
+            * Atualiza os campos com o auto validate
+            */
+            var data_id = 0;
+            $(".my-form").attr("data-m-form", "1");
+            $(".my-form").find('.my-form-input').each(function(){                
+                $(this).attr("data-id", data_id);
+                var text_validate = '<div class="border-validator" data-id="'+data_id+'"></div>' +
+                                    '<span class="icon-validation" data-id="'+data_id+'"></span>' + 
+                                    '<span class="text-validation" data-id="'+data_id+'"></span>';
+                $('input, select, textarea', this).attr("data-input", data_id).after(text_validate);
+                data_id++;
+            });
+            /* 
+            * Cria o evento observador para click para os campos do formulário
+            */
+            $(document).on("click", "input, select, textarea", function(){
+                clearFeedback($(this).attr("data-input"));                
+            });
+            /* 
+            * Cria o evento observador para change para os campos do formulário
+            */
+            $(document).on("change", "input, select, textarea", function(){
+                if(getRules($(this).attr("data-validate"), $(this))===false){
+                    errorFeedback($(this).attr("data-input"));
+                }else{
+                    successFeedback($(this).attr("data-input"));
+                }
+            });
+            /*
+             * Submit no form
+            */
+            $(document).on("submit", "#my-form", function(e){
+                e.preventDefault();
+			    e.stopPropagation();
+                checkAllInputs($(this).attr("data-m-form"));
+            });
+        });
+        
+
+    </script>    
+</body>
+</html>
