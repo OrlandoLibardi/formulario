@@ -7,25 +7,29 @@
         var $el = $(this);
         var defaults = {
             id : 'm-' + Math.floor((Math.random() * 100) + 1),
-            'errors' : [{
+            show_text : true,
+            errors : [{
                 'not-null' : 'Esse campo é obrigatório!',
                 'string'   : 'Você não pode usar caracteres especiais aqui!',
-                'min'      : 'Esse campo precisa ter ao menos %number% caracteres!',
-                'max'      : 'Esse campo precisa ter no máximo %number% caracteres!',
+                'min'      : 'Esse campo precisa ter ao menos %VAL% caracteres!',
+                'max'      : 'Esse campo precisa ter no máximo %VAL% caracteres!',
                 'email'    : 'Esse não é um endereço de e-mail valido!',
-                'input-confirm' : 'O valor desse campo deve ser idêntico ao %input%!',
-                'cpf' : 'CPF inválido!',
-                'cep' : 'CEP inválido!',
-                'numeric' : 'Isso não é um número!',
-                'min-number' : 'O valor desse campo deve ser maior que %number%!',
-                'max-number' : 'O valor desse campo deve ser menor que %number%!'
+                'input-confirm' : 'O valor desse campo deve ser idêntico ao %VAL%!',
+                'cpf'        : 'CPF inválido!',
+                'cep'        : 'CEP inválido!',
+                'numeric'    : 'Isso não é um número!',
+                'min-number' : 'O valor desse campo deve ser maior que %VAL%!',
+                'max-number' : 'O valor desse campo deve ser menor que %VAL%!'
             }]
         };
-        var settings = $.extend({}, defaults, options);
-        var inputs   = "form[data-m-form="+settings.id+"] .my-form-input > input, form[data-m-form="+settings.id+"] .my-form-input > select, form[data-m-form="+settings.id+"] .my-form-input > textarea";
-        /* init() */
+        var settings = $.extend({}, defaults, options),
+            inputs   = "form[data-m-form="+settings.id+"] .my-form-input > input, form[data-m-form="+settings.id+"] .my-form-input > select, form[data-m-form="+settings.id+"] .my-form-input > textarea",
+            last_error = [];
+
+        /**
+         * init 
+         */
         function init(){
-            /* Iniciando o formulário */
             var data_id = 0;
             $el.attr("data-m-form", settings.id);
             $el.find('.my-form-input').each(function(){                
@@ -67,11 +71,14 @@
                     if(t_rules[key].indexOf(":") > -1){
                         var temp = t_rules[key].split(":"); 
                         if(!eval(renameFunction(temp[0]))($this, temp[1])){
+                            setLastError($this.attr("data-input"), temp[0], temp[1]);
+                            setLastError()
                             return false;
                         }
                     }
                     else{
                         if(!eval(renameFunction(t_rules[key]))($this)){
+                            setLastError($this.attr("data-input"), t_rules[key]);
                             return false;
                         }
                     }                     
@@ -81,8 +88,22 @@
             
             return true;
         }
+        /**
+         * Ultimo erro por input
+        */
+        function setLastError(input_id, key_error, str=false){
+            
+            if(!input_id) return false;
+
+            var error_temp = settings.errors[0][key_error];
+
+            if(str!=false) error_temp = error_temp.replace("%VAL%", str);
+
+            last_error[input_id] = error_temp;
+
+        } 
         /*
-        * Transforma o termos de validação na funcão 
+        * Transforma o termo de validação na função 
         * @params string function_name
         * @return funtion
         */
@@ -93,10 +114,7 @@
                 r += f[key].charAt(0).toUpperCase() + f[key].slice(1);
             }
             return r;
-        }        
-        /*
-        * Functions Validate
-        */
+        }     
         /*
         * Not-null
         * @param $this
@@ -180,9 +198,24 @@
         * @param $this
         * @return bool
         */
-        function validateCpf($this){
-
-        }
+       function validateCpf($this) {
+            var _sun = 0, _rest, _val = $this.val().replace(/\D/g, "");
+            if (_val == "00000000000") return false;
+            if (_val.length != 11) return false;
+            for (var i = 1; i <= 9; i++) _sun = _sun + parseInt(_val.substring(i - 1, i)) * (11 - i);
+            _rest = (_sun * 10) % 11;
+        
+            if ((_rest == 10) || (_rest == 11)) _rest = 0;
+            if (_rest != parseInt(_val.substring(9, 10))) return false;
+        
+            _sun = 0;
+            for (var i = 1; i <= 10; i++) _sun = _sun + parseInt(_val.substring(i - 1, i)) * (12 - i);
+            _rest = (_sun * 10) % 11;
+        
+            if ((_rest == 10) || (_rest == 11)) _rest = 0;
+            if (_rest != parseInt(_val.substring(10, 11))) return false;
+            return true;
+        }        
         /*
         * CEP
         * @param $this
@@ -191,16 +224,15 @@
        function validateCep($this){
            var _value = $this.val().replace(/\D/g, ""),
                _count = _value.length;
-
-           //menor que 5 ou maior q 5 e menor que 8 OU 
-           if((_count < 5) || (_count > 5 && _count < 8)){
+           
+           if((_count < 5) || (_count > 5 && _count != 8)){              
               return false;    
            }   
            var check = 0;
            for(var i=0; i <= _count; i++){
               if(_value[i] >= 0 && _value[i] <= 9){
                     check++;
-              }
+              }              
            }   
            return (check == _count) ? true : false; 
        }     
@@ -217,8 +249,10 @@
             $('.border-validator[data-id='+data_id+']').addClass("success");
             $('.icon-validation[data-id='+data_id+']').addClass("success");
         }
-        function errorFeedback(data_id){            
-            $('.text-validation[data-id='+data_id+']').addClass("error").html('Erro!');
+        function errorFeedback(data_id){  
+            if(settings.show_text===true){
+                $('.text-validation[data-id='+data_id+']').addClass("error").html(last_error[data_id]);
+            }
             $('.border-validator[data-id='+data_id+']').addClass("error");
             $('.icon-validation[data-id='+data_id+']').addClass("error");
         }    
@@ -230,7 +264,7 @@
             clearFeedback($(this).attr("data-input"));                
         });
         /* 
-        * Cria o evento observador para change para os campos do formulário
+        * Cria o evento observador para o evento change dos campos
         */
         $(document).on("change", inputs, function(){
             if(getRules($(this).attr("data-validate"), $(this))===false){
@@ -259,8 +293,7 @@
                 if($(this).val()!=""){
                     if(getRules($(this).attr("data-validate"), $(this))===false){
                         errorFeedback($(this).attr("data-input"));
-                    }
-                    else{
+                    }else{
                         successFeedback($(this).attr("data-input"));
                     }
                 }   
