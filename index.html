@@ -22,7 +22,7 @@
                             <div class="col-12">
                                 <div class="my-form-input">
                                     <label>CPF</label>
-                                    <input type="text" name="cpf" id="cpf" value="" placeholder="Seu CPF..." data-validate="not-null|cpf" class="">                                    
+                                    <input type="text" name="cpf" id="cpf" value="" placeholder="Seu CPF..." data-validate="not-null|cpf" data-mask="000.000.000-00" class="">                                    
                                 </div>                                
                             </div>
                         </div>
@@ -64,10 +64,16 @@
                                     <input type="text" name="age" id="age" value="" placeholder="Qual é a sua idade..." data-validate="not-null|numeric|min-number:1|max-number:99">
                                 </div>
                             </div>
+                            <div class="col-md-12 col-8">
+                                <div class="my-form-input">
+                                    <label>Data</label>
+                                    <input type="text" name="date" id="date" value="" placeholder="__/__/____" data-validate="not-null|date-br">
+                                </div>
+                            </div>
                             <div class="col-md-12 col-12">
                                 <div class="my-form-input">
                                     <label>CEP </label>
-                                    <input type="text" name="cep" id="cep" value="" placeholder="00000-000" data-validate="not-null|cep">
+                                    <input type="text" name="cep" id="cep" value="" placeholder="00000-000" data-validate="not-null|cep" data-mask="00000-000">
                                 </div>
                             </div>
                         </div>

@@ -19,7 +19,8 @@
                 'cep'        : 'CEP inválido!',
                 'numeric'    : 'Isso não é um número!',
                 'min-number' : 'O valor desse campo deve ser maior que %VAL%!',
-                'max-number' : 'O valor desse campo deve ser menor que %VAL%!'
+                'max-number' : 'O valor desse campo deve ser menor que %VAL%!',
+                'date-br'    : 'Isso não é uma data válida',
             }]
         };
         var settings = $.extend({}, defaults, options),
@@ -194,13 +195,53 @@
             return _number >= _value;
         }
         /*
+         * Date br 
+         * @param $this
+         * @return bool
+         */
+        function validateDateBr($this){            
+            var _val = $this.val().replace(/\D/g, ""), d = parseInt(_val[0]+""+""+_val[1]), m = parseInt(_val[2]+""+""+_val[3]);
+            if(_val.length != 8) return false; 
+            if(d == 0 || d > 31 || m > 12 || m == 0) return false;
+            return true;
+        }
+
+
+        function checkSequence($this, _digits){
+
+            var _value = $this.val(), _check = numberSequence(_digits);
+
+            for(var key in _check){
+                if(_check[key] == _value){
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        /**
+         * Cria uma sequencia de numeros
+         */
+        function numberSequence(_digits){
+            var _check = [];
+            for(var i = 0; i <= 9; i++){
+                var _temp = "";
+                for(var ii = 0; ii < _digits;  ii++){
+                    _temp += "" + i;
+                }
+                _check.push(_temp)
+            }
+            return _check;
+        }
+
+        /*
         * CPF
         * @param $this
         * @return bool
         */
        function validateCpf($this) {
             var _sun = 0, _rest, _val = $this.val().replace(/\D/g, "");
-            if (_val == "00000000000") return false;
+            if(checkSequence($this, 11) == false) return false;
             if (_val.length != 11) return false;
             for (var i = 1; i <= 9; i++) _sun = _sun + parseInt(_val.substring(i - 1, i)) * (11 - i);
             _rest = (_sun * 10) % 11;
