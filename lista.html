@@ -1,0 +1,237 @@
+<div class="atomoFiltroReservarPassagem atomoContainer atomoAddBottom40">
+        <div class="tabela">
+        <h3 style="color:#11264e; font-size:20px; text-align:center; font-weight:bold; margin:  40px 0;">Busque por origem/destino e aproveite as ofertas:</h3>
+        <!-- TABLEAMOBILE -->
+        
+        <table background="red" border="0" cellpadding="0" cellspacing="0" class="esconder-desktop" width="100%">
+            <tbody>
+                
+            </tbody>
+        </table>
+        <script>
+            $(document).ready(function(){
+                var obj = "";
+                $(".esconder-mobile > tbody").find('tr').each(function(){
+                    var old_p = $('td:eq(3)', this).html()
+                                    .replace(/<strong>/g, "")
+                                    .replace(/<\/strong>/g, "")
+                                    .replace(/<br \/>/g, "")
+                                    .replace(/<br>/g, "")          
+                                    .replace(/<br\/>/g, "");  
+                    var points =  $('td:eq(4)', this).html()
+                                    .replace(/<strong>/g, "")
+                                    .replace(/<\/strong>/g, "")
+                                    .replace(/<br \/>/g, "")
+                                    .replace(/<br>/g, "")          
+                                    .replace(/<br\/>/g, "");  
+                    obj += '<tr>';
+                        obj += '<td><strong>De:</strong> '+$('td:eq(0)', this).html()+'<br />';
+                        obj += '<strong>Para:</strong> '+$('td:eq(2)', this).html()+'<br />';
+                        obj += '<strong>Ida:</strong> '+old_p+'<br />';
+                        obj += '<strong>Volta:</strong> '+points+'<br />';
+                        obj += $('td:eq(5)', this).html() + '</td>';
+                    obj += '</tr>';
+                });
+
+                $(".esconder-desktop").html(obj);
+            });
+        </script>
+        
+        <table border="0" cellpadding="0" cellspacing="0" class="esconder-mobile" width="100%">
+            <thead>
+                <tr>
+                    <td class="origem" colspan="2" width="310">Origem</td>
+                    <td class="destinos" width="215">Destinos</td>
+                    <td class="ida" style="padding-left:0px;" width="195">Ida</td>
+                    <td class="volta" style="padding-left:0px;" width="230">Volta</td>
+                    <td width="190">&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody><!-- ITEM -->
+                <tr class="item_viagem">
+                    <td> Belo Horizonte</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Rio de Janeiro (SDU)</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>3.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>2.100  </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=CNF&arrival=SDU&departureDate=2019-11-20&returnDate=2019-11-27&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                <tr class="item_viagem">
+                    <td>São Paulo (GRU)</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Florianópolis </td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>3.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>2.100 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=GRU&arrival=FLN&departureDate=2019-11-24&returnDate=2019-11-27&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                
+                <tr class="item_viagem">
+                    <td>Curitiba</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">São Paulo (GUR)</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>3.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>2.100 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=CWB&arrival=GRU&departureDate=2019-11-26&returnDate=2019-11-28&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                <tr class="item_viagem">
+                    <td>Toledo</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Curitiba </td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>3.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>2.100 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=TOW&arrival=CWB&departureDate=2019-11-07&returnDate=2019-11-28&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                <tr class="item_viagem">
+                    <td>Rio de Janeiro (SDU)</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Brasília</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>4.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>2.800 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=SDU&arrival=BSB&departureDate=2019-11-06&returnDate=2019-11-26&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                
+                <tr class="item_viagem">
+                    <td>Brasília </td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Campinas</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>6.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>4.200 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=BSB&arrival=VCP&departureDate=2019-11-27&returnDate=2019-11-29&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                
+                <tr class="item_viagem">
+                    <td>Belo Horizonte</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Salvador</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>6.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>4.200 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=CNF&arrival=SSA&departureDate=2019-11-23&returnDate=2019-11-29&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                <tr class="item_viagem">
+                    <td>Salvador</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Recife</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>6.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>4.200 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=PNZ&arrival=REC&departureDate=2019-10-23&returnDate=2019-11-23&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+                <tr class="item_viagem">
+                    <td>Campo Grande</td>
+                    <td style="padding-left:0px;">&nbsp;</td>
+                    <td class="destinos">Cuiába</td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;" valign="top">A partir de:<br />
+                    <strong><span>6.000 </span></strong> <strong>pontos</strong></td>
+                    <td class="pontos" style="padding-left:0px; line-height:16px;">A partir de:<br />
+                    <strong><span>4.200 </span></strong> <strong>pontos + taxas</strong></td>
+                    <td style="padding-left:0px; text-align:center;"><a href="https://viajemais.voeazul.com.br/PromotionDirect.aspx?departure=CGR&arrival=CGB&departureDate=2019-11-06&returnDate=2019-11-21&numPax=1&numPaxCHD=0&numPaxINF=0&typeSearch=RoundTrip&flexibilityTravel=false&webStore=points" class="atomoBtn atomo-texto-branco atomo-bg-azul_051e41" style="display: inline-block; text-decoration: none; color: #FFF;">Resgate já</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>
+        <style type="text/css">.esconder-desktop {display:none}
+                                          .atomo-texto-cinza_c0c0c0{
+            color:#c0c0c0
+        }
+        .atomo-texto-azul_2c6bb0{
+            color:#2c6bb0
+        }
+        .atomo-bg-azul_051e41{
+            background:#051e41!important
+        }
+        
+        .atomoFiltroReservarPassagem table{
+            margin:40px 0;
+        }
+        .atomoFiltroReservarPassagem table thead tr {border-left:1px solid #e4e4e4;border-right:1px solid #e4e4e4;}
+        .atomoFiltroReservarPassagem table thead tr td{
+            background:#f6fbfd;
+            font-size:16px;
+            color:#2c6bb0;
+            font-weight:bold
+        }
+        .atomoFiltroReservarPassagem table tr td{
+            padding:15px 0 15px 45px;
+            border-top:1px solid #e4e4e4;
+            font-size:21px;
+            color:#041e43;
+            font-weight:lighter
+        }
+        .atomoFiltroReservarPassagem table tr td.pontos{
+            font-size:16px
+        }
+        .atomoFiltroReservarPassagem table tr td.pontos strong{
+            color:#2c6bb0
+        }
+        .atomoFiltroReservarPassagem table tr td.pontos span{
+            font-size:25px;
+            line-height:28px;
+        }
+        .atomoFiltroReservarPassagem table tr td .icon-plane{
+            font-size:26px;
+            margin:0 15px 0 0;
+            color:#2c6bb0
+        }
+        .atomoFiltroReservarPassagem table tr td.botao{
+            padding:15px 0 15px 0;
+            font-size:16px;
+            font-weight:normal
+        }
+        .atomoFiltroReservarPassagem table tr td.origem{
+            padding:15px 0 15px 50px
+        }
+        .atomoFiltroReservarPassagem table  tr td.destinos{ padding-left:0px; }
+        
+        @media(max-width:800px){
+        .esconder-desktop {display:block}
+            .esconder-mobile {display:none}
+            .atomoFiltroReservarPassagem .filtro{
+                width:100%;
+                float:none
+            }
+            .atomoFiltroReservarPassagem .icon{
+                display:none
+            }
+            .tabela{
+                width:100%
+            }
+            .atomoFiltroReservarPassagem table tr td.destinos{
+                min-width:260px
+            }
+            .atomoFiltroReservarPassagem table tr td.origem{
+                min-width:415px
+            }
+            .atomoFiltroReservarPassagem table tr td.pontos{
+                min-width:265px
+            }
+            .atomoFiltroReservarPassagem table tr td.botao{
+                min-width:170px
+            }
+            .atomoFiltroReservarPassagem table tr td{
+                padding:15px 0 15px 15px;
+                font-size:18px;
+                line-height: 24px;
+            }
+            .atomoFiltroReservarPassagem table tr td a{
+                margin-top: 15px;
+            }
+
+        }
+        </style>
+        

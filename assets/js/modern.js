@@ -34,12 +34,14 @@
             var data_id = 0;
             $el.attr("data-m-form", settings.id);
             $el.find('.my-form-input').each(function(){                
+                initMask($('input, select, textarea', this));
                 $(this).attr("data-id", data_id);
                 var text_validate = '<div class="border-validator" data-id="'+data_id+'"></div>' +
                                     '<span class="icon-validation" data-id="'+data_id+'"></span>' + 
                                     '<span class="text-validation" data-id="'+data_id+'"></span>';
                 $('input, select, textarea', this).attr("data-input", data_id).after(text_validate);
                 data_id++;
+               
             });
 
         }
@@ -60,7 +62,7 @@
 
             return error_count;
         }
-        /*
+        /**
         * Lê as regras de validação do input e ativa a função
         * @param string validate, object $this
         * return bool
@@ -103,7 +105,7 @@
             last_error[input_id] = error_temp;
 
         } 
-        /*
+        /**
         * Transforma o termo de validação na função 
         * @params string function_name
         * @return funtion
@@ -116,7 +118,7 @@
             }
             return r;
         }     
-        /*
+        /**
         * Not-null
         * @param $this
         * @return bool
@@ -125,7 +127,7 @@
             if ($this.val() === "") return false;
             return true;
         }
-        /*
+        /**
         * String 
         * @param $this
         * @return bool
@@ -133,7 +135,7 @@
         function validateString($this){
             return typeof $this.val() === 'string';
         }
-        /*
+        /**
         * Email
         * @param $this
         * @return bool
@@ -142,7 +144,7 @@
             var re = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/gi;        
             return re.test($this.val()); 
         }
-        /*
+        /**
         * Numeric
         * @param $this
         * @return bool
@@ -150,7 +152,7 @@
         function validateNumeric($this){
             return !isNaN($this.val());
         }
-        /*
+        /**
         * Min
         * @param $this
         * @return bool
@@ -159,7 +161,7 @@
             var count = $this.val().length;
             return count >= number;
         }
-        /*
+        /**
         * Max
         * @param $this, number
         * @return bool
@@ -168,7 +170,7 @@
             var count = $this.val().length;
             return count <= number;
         }
-        /*
+        /**
         * Confirm value
         * @param $this, input
         * @return bool
@@ -176,7 +178,7 @@
         function validateInputConfirm($this, _input){
             return $this.val() === $('input[name='+_input+']').val();
         }
-        /*
+        /**
         * Min number
         * @param $this, number
         * @return bool
@@ -184,7 +186,7 @@
         function validateMinNumber($this, number){
             return $this.val() >= number;
         }
-        /*
+        /**
         * Max number
         * @param $this, number
         * @return bool
@@ -194,7 +196,7 @@
                 _number = parseInt(number);
             return _number >= _value;
         }
-        /*
+        /**
          * Date br 
          * @param $this
          * @return bool
@@ -205,22 +207,24 @@
             if(d == 0 || d > 31 || m > 12 || m == 0) return false;
             return true;
         }
-
-
+        /**
+         * Verifica se um valor é uma sequencia de números iguais
+         * @param $this, _digits
+         * @return bool
+        */
         function checkSequence($this, _digits){
-
             var _value = $this.val(), _check = numberSequence(_digits);
-
             for(var key in _check){
                 if(_check[key] == _value){
                     return false;
                 }
             }
-
             return true;
         }
         /**
-         * Cria uma sequencia de numeros
+         * Cria uma sequencia 0 a 9 de numeros iguais
+         * @param _digits
+         * @return _check array
          */
         function numberSequence(_digits){
             var _check = [];
@@ -233,8 +237,7 @@
             }
             return _check;
         }
-
-        /*
+        /**
         * CPF
         * @param $this
         * @return bool
@@ -257,26 +260,63 @@
             if (_rest != parseInt(_val.substring(10, 11))) return false;
             return true;
         }        
-        /*
+        /**
         * CEP
         * @param $this
         * @return bool
         */   
        function validateCep($this){
            var _value = $this.val().replace(/\D/g, ""),
-               _count = _value.length;
+               _count = _value.length,
+               _check = 0;
            
-           if((_count < 5) || (_count > 5 && _count != 8)){              
-              return false;    
-           }   
-           var check = 0;
+           if((_count < 5) || (_count > 5 && _count != 8)) return false;  
+           
            for(var i=0; i <= _count; i++){
               if(_value[i] >= 0 && _value[i] <= 9){
-                    check++;
+                _check++;
               }              
            }   
-           return (check == _count) ? true : false; 
+           return (_check == _count) ? true : false; 
        }     
+       /**
+        * Mascaras
+       */
+       function initMask($this){
+           if($this.attr("data-mask")!= undefined){
+                var _mask = setMask(arrayMask($this.attr("data-mask")));
+                $this.attr("data-mask", _mask).addClass("data-mask");
+           }
+       }
+       function arrayMask(_val){
+            var _p = [], _a = "", _t = _val.length;
+            for(var i = 0; i < _t; i++){ 
+                if(!isNaN(_val[i])){
+                    _a += _val[i];
+                }
+                else{ 
+                    _p.push(_a);
+                    _p.push(_val[i]);         
+                    _a = "";
+                }
+                if(i == (_t-1)) _p.push(_a);
+            }
+            return _p;
+        }
+        function setMask(_mask){
+            var _a = "", _b = "", _c = 1;
+            for(var i=0; i<_mask.length; i++){
+                if(!isNaN(_mask[i])){
+                    var _d = "" + _mask[i];
+                        _a += '(\\d{' + _d.length + '})';
+                        _b += "\\$"+_c+"";
+                }else{
+                    _b += _mask[i]+"";
+                    _c++;
+                }
+            }
+            return '/'+_a+'/g,'+ '"'+ _b + '"'; 
+        }
         /*
         * Feedbacks inputs
         */
@@ -326,6 +366,14 @@
               $el.submit();
             }
         });
+
+        $(document).on("keypress", '.data-mask', function(){
+            var _this = $(this);
+            setTimeout(function(){
+                //_this.val(_this.val().replace(/\D/g, "").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3-\$4"));
+            },1);
+        });
+
         /*
           
         */
@@ -334,7 +382,8 @@
                 if($(this).val()!=""){
                     if(getRules($(this).attr("data-validate"), $(this))===false){
                         errorFeedback($(this).attr("data-input"));
-                    }else{
+                    }
+                    else{
                         successFeedback($(this).attr("data-input"));
                     }
                 }   
