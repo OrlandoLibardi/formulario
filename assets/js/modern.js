@@ -122,8 +122,7 @@
         * @return bool
         */
         function validateNotNull($this){
-            if ($this.val() === "") return false;
-            return true;
+            return $this.val() === "";
         }
         /*
         * String 
@@ -156,8 +155,7 @@
         * @return bool
         */
         function validateMin($this, number){
-            var count = $this.val().length;
-            return count >= number;
+            return $this.val().length >= number;
         }
         /*
         * Max
@@ -165,8 +163,7 @@
         * @return bool
         */
         function validateMax($this, number){
-            var count = $this.val().length;
-            return count <= number;
+            return $this.val().length <= number;
         }
         /*
         * Confirm value
@@ -190,9 +187,7 @@
         * @return bool
         */
         function validateMaxNumber($this, number){
-            var _value = parseInt($this.val()),
-                _number = parseInt(number);
-            return _number >= _value;
+            return parseInt(number) >= parseInt($this.val());
         }
         /*
          * Date br 
@@ -285,8 +280,7 @@
             $('.border-validator[data-id='+data_id+']').removeClass("success").removeClass("error");
             $('.icon-validation[data-id='+data_id+']').removeClass("success").removeClass("error");
         }
-        function successFeedback(data_id){            
-           // $('.text-validation[data-id='+data_id+']').addClass("success").html('Tudo certo!');
+        function successFeedback(data_id){
             $('.border-validator[data-id='+data_id+']').addClass("success");
             $('.icon-validation[data-id='+data_id+']').addClass("success");
         }
